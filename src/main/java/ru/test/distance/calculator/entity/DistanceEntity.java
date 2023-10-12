@@ -1,30 +1,32 @@
 package ru.test.distance.calculator.entity;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
 
 @Entity
 @Table(name = "distance")
 @Getter
 @Setter
+@IdClass(DistanceId.class)
 public class DistanceEntity {
 
-    @EmbeddedId
-    private DistanceId id;
+    @Id
+    @Column(name = "from_city")
+    private Long fromCity;
+
+    @Id
+    @Column(name = "to_city")
+    private Long toCity;
 
     private Long distance;
-}
 
-@Embeddable
-@Setter
-@Getter
-class DistanceId implements Serializable {
-    private Long from_city;
-    private Long to_city;
+    @ManyToOne
+    @JoinColumn(name = "to_city", updatable = false, insertable = false)
+    private CityEntity toCityEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "from_city", updatable = false, insertable = false)
+    private CityEntity fromCityEntity;
 }

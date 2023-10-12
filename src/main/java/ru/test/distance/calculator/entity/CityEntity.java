@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "city")
 @Getter
@@ -20,4 +23,9 @@ public class CityEntity {
 
     private Double longitude;
 
+    @OneToMany(mappedBy = "toCityEntity")
+    private List<DistanceEntity> distanceToCity = new ArrayList<>();
+
+    @OneToMany(mappedBy = "fromCityEntity")
+    private List<DistanceEntity> distanceFromCity = new ArrayList<>();
 }

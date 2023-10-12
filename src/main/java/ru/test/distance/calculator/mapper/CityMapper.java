@@ -1,7 +1,14 @@
 package ru.test.distance.calculator.mapper;
 
 import ru.test.distance.calculator.dto.CityDto;
+import ru.test.distance.calculator.dto.CityExtendDto;
+import ru.test.distance.calculator.dto.DistanceDto;
+import ru.test.distance.calculator.dto.Point;
 import ru.test.distance.calculator.entity.CityEntity;
+import ru.test.distance.calculator.util.DistanceCalculator;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CityMapper {
     public static CityDto toDto(CityEntity cityEntity) {
@@ -18,5 +25,26 @@ public class CityMapper {
         cityEntity.setLatitude(cityDto.getLatitude());
         cityEntity.setLongitude(cityDto.getLongitude());
         return cityEntity;
+    }
+
+    // можно сократить
+    public static CityExtendDto toExtendDto(CityEntity cityEntity) {
+        CityExtendDto cityExtendDto = new CityExtendDto();
+        cityExtendDto.setName(cityEntity.getName());
+        cityExtendDto.setLatitude(cityEntity.getLatitude());
+        cityExtendDto.setLongitude(cityEntity.getLongitude());
+        List<DistanceDto> collect = cityEntity.getDistanceFromCity().stream()
+                .map(s -> {
+                    Point pointFrom = new Point(cityEntity.getLatitude(), cityEntity.getLongitude());
+                    Point pointTo = new Point(s.getToCityEntity().getLatitude(), s.getToCityEntity().getLongitude());
+                            DistanceDto distanceDto = new DistanceDto();
+                            distanceDto.setName(s.getToCityEntity().getName());
+                            distanceDto.setDistance(DistanceCalculator.getDistance(pointFrom, pointTo));
+                            return distanceDto;
+                        }
+                )
+                .collect(Collectors.toList());
+        cityExtendDto.setDistanceDtoList(collect);
+        return cityExtendDto;
     }
 }
