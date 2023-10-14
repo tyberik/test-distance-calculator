@@ -2,11 +2,15 @@ package ru.test.distance.calculator.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.test.distance.calculator.dto.CitiesDto;
 import ru.test.distance.calculator.dto.CityDto;
 import ru.test.distance.calculator.dto.CityExtendDto;
 import ru.test.distance.calculator.entity.CityEntity;
 import ru.test.distance.calculator.mapper.CityMapper;
 import ru.test.distance.calculator.repository.CityRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CityService {
@@ -25,5 +29,10 @@ public class CityService {
     public CityExtendDto getCity(String name) {
         CityEntity cityEntity = cityRepository.findCityByCity(name);
         return CityMapper.toExtendDto(cityEntity);
+    }
+
+    public List<CitiesDto> getCities() {
+        List<CityEntity> cityEntity = cityRepository.findAll();
+        return cityEntity.stream().map(CityMapper::toDtoCities).collect(Collectors.toList());
     }
 }

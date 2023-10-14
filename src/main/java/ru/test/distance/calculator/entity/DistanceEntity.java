@@ -22,11 +22,11 @@ public class DistanceEntity {
 
     private Long distance;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "to_city", updatable = false, insertable = false)
     private CityEntity toCityEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "from_city", updatable = false, insertable = false)
     private CityEntity fromCityEntity;
 }
