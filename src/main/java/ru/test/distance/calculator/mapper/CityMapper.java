@@ -1,9 +1,6 @@
 package ru.test.distance.calculator.mapper;
 
-import ru.test.distance.calculator.dto.CityDto;
-import ru.test.distance.calculator.dto.CityExtendDto;
-import ru.test.distance.calculator.dto.DistanceDto;
-import ru.test.distance.calculator.dto.Point;
+import ru.test.distance.calculator.dto.*;
 import ru.test.distance.calculator.entity.CityEntity;
 import ru.test.distance.calculator.util.DistanceCalculator;
 
@@ -46,5 +43,12 @@ public class CityMapper {
                 .collect(Collectors.toList());
         cityExtendDto.setDistanceDtoList(collect);
         return cityExtendDto;
+    }
+
+    public static CitiesDto toDtoCities(CityEntity cityEntity){
+        CitiesDto citiesDto = new CitiesDto();
+        citiesDto.setId(cityEntity.getId());
+        citiesDto.setName(cityEntity.getName());
+        return citiesDto;
     }
 }

@@ -23,9 +23,9 @@ public class CityEntity {
 
     private Double longitude;
 
-    @OneToMany(mappedBy = "toCityEntity")
+    @OneToMany(mappedBy = "toCityEntity", fetch = FetchType.LAZY)
     private List<DistanceEntity> distanceToCity = new ArrayList<>();
 
-    @OneToMany(mappedBy = "fromCityEntity")
+    @OneToMany(mappedBy = "fromCityEntity", fetch = FetchType.LAZY)
     private List<DistanceEntity> distanceFromCity = new ArrayList<>();
 }
