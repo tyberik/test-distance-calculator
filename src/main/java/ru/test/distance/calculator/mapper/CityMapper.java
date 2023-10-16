@@ -36,7 +36,7 @@ public class CityMapper {
                     Point pointTo = new Point(s.getToCityEntity().getLatitude(), s.getToCityEntity().getLongitude());
                             DistanceDto distanceDto = new DistanceDto();
                             distanceDto.setName(s.getToCityEntity().getName());
-                            distanceDto.setDistance(DistanceCalculator.getDistance(pointFrom, pointTo));
+                            distanceDto.setDistance((long) DistanceCalculator.getDistance(pointFrom, pointTo));
                             return distanceDto;
                         }
                 )
@@ -45,10 +45,12 @@ public class CityMapper {
         return cityExtendDto;
     }
 
-    public static CitiesDto toDtoCities(CityEntity cityEntity){
-        CitiesDto citiesDto = new CitiesDto();
-        citiesDto.setId(cityEntity.getId());
-        citiesDto.setName(cityEntity.getName());
-        return citiesDto;
+    public static CityShortDto toDtoCities(CityEntity cityEntity){
+        CityShortDto cityShortDto = new CityShortDto();
+        cityShortDto.setId(cityEntity.getId());
+        cityShortDto.setName(cityEntity.getName());
+        return cityShortDto;
     }
+
+
 }

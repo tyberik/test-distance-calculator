@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DistanceDto {
-    private String name;
+public class DistanceRequestDto {
+    private String fromCity;
+    private String toCity;
     private Long distance;
 }

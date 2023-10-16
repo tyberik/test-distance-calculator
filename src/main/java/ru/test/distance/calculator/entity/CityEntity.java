@@ -23,9 +23,18 @@ public class CityEntity {
 
     private Double longitude;
 
-    @OneToMany(mappedBy = "toCityEntity", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "toCityEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<DistanceEntity> distanceToCity = new ArrayList<>();
 
-    @OneToMany(mappedBy = "fromCityEntity", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "fromCityEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<DistanceEntity> distanceFromCity = new ArrayList<>();
+
+    public CityEntity(String name, Double latitude, Double longitude) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public CityEntity() {
+    }
 }
