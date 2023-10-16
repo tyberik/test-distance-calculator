@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: db/changelog/1_init.sql
+  - include:
+      file: db/changelog/2_set_city_unique_name.sql
