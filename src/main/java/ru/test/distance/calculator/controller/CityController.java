@@ -21,7 +21,7 @@ public class CityController {
         return cityService.getCityById(id);
     }
 
-    @GetMapping("/getCity/{name}")
+    @GetMapping("/getCity/{name}") //калькулятор crowflight
     public CityExtendDto getCity(@PathVariable() String name) {
         return cityService.getCity(name);
     }
@@ -44,5 +44,10 @@ public class CityController {
     @PostMapping("/cities1")
     public void getCities1(@RequestBody MultipartFile file) {
         cityService.saveCities1(file);
+    }
+
+    @GetMapping("/distanceMatrix")
+    public void calcDistanceMatrix(@RequestParam Long fromCity, @RequestParam Long toCity){
+        cityService.getDistanceMatrix(fromCity, toCity);
     }
 }

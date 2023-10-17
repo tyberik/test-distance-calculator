@@ -16,6 +16,7 @@ import ru.test.distance.calculator.mapper.CityMapper;
 import ru.test.distance.calculator.mapper.DistanceMapper;
 import ru.test.distance.calculator.repository.CityRepository;
 import ru.test.distance.calculator.repository.DistanceRepository;
+import ru.test.distance.calculator.util.DistanceMatrixCalculator;
 
 import java.io.InputStream;
 import java.util.List;
@@ -30,6 +31,9 @@ public class CityServiceImpl implements CityService {
 
     @Autowired
     private DistanceRepository distanceRepository;
+
+    @Autowired
+    private DistanceMatrixCalculator distanceMatrixCalculator;
 
     @Override
     public CityDto getCityById(Long id) {
@@ -102,6 +106,16 @@ public class CityServiceImpl implements CityService {
                 save.stream().collect(Collectors.toMap(CityEntity::getName, CityEntity::getId));
         List<DistanceEntity> distanceEntities = DistanceMapper.toEntity(map, citiesRequestDto.getDistances());
         distanceRepository.saveAll(distanceEntities);
+    }
+
+    @Override
+    public void getDistanceMatrix(Long fromCity, Long toCity) {
+        List<CityEntity> cityEntities = cityRepository.findAll();
+        List<DistanceEntity> distanceEntities = distanceRepository.findAll();
+
+
+        distanceMatrixCalculator.calc(cityEntities, distanceEntities,fromCity, toCity);
+
     }
 }
 
