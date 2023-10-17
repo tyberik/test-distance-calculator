@@ -1,6 +1,5 @@
 package ru.test.distance.calculator.controller;
 
-import com.fasterxml.jackson.databind.JavaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,9 +8,7 @@ import ru.test.distance.calculator.dto.CityShortDto;
 import ru.test.distance.calculator.dto.CityDto;
 import ru.test.distance.calculator.dto.CityExtendDto;
 import ru.test.distance.calculator.service.CityService;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-import java.io.InputStream;
 import java.util.List;
 
 @RestController
