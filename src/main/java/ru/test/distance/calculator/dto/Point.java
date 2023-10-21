@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Point {
-
     private Double x;
     private Double y;
 }

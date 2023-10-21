@@ -5,11 +5,10 @@ import ru.test.distance.calculator.dto.Point;
 import static java.lang.Math.*;
 
 public class DistanceCalculator {
+
     private static final double EARTH_RADIUS = 6371.;
 
-
     public static double getDistance(Point pointFrom, Point pointTo) {
-
 
         final double dlng = deg2rad(pointFrom.getY() - pointTo.getY());
         final double dlat = deg2rad(pointFrom.getX() - pointTo.getX());

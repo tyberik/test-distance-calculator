@@ -9,5 +9,4 @@ public class CityDto {
     private String name;
     private Double latitude;
     private Double longitude;
-
 }
