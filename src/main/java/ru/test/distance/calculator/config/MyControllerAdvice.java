@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import ru.test.distance.calculator.exception.ErrorResponseDto;
 import ru.test.distance.calculator.exception.InvalidFileException;
-import ru.test.distance.calculator.exception.InvalidSizeListsException;
 
 import java.util.List;
 import java.util.Objects;
@@ -45,18 +44,6 @@ public class MyControllerAdvice {
     @ExceptionHandler(InvalidFileException.class)
     public ResponseEntity<ErrorResponseDto> handleInvalidFileException(InvalidFileException e) {
         System.out.printf("InvalidFileException has throw, %s", e.getMessage());
-        return ResponseEntity.badRequest().body(
-                new ErrorResponseDto(
-                        HttpStatus.BAD_REQUEST.name(),
-                        e.getMessage(),
-                        null
-                )
-        );
-    }
-
-    @ExceptionHandler(InvalidSizeListsException.class)
-    public ResponseEntity<ErrorResponseDto> handleInvalidSizeListsException(InvalidSizeListsException e) {
-        System.out.printf("InvalidSizeListsException has throw, %s", e.getMessage());
         return ResponseEntity.badRequest().body(
                 new ErrorResponseDto(
                         HttpStatus.BAD_REQUEST.name(),
