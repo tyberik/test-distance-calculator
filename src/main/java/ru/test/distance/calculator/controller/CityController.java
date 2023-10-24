@@ -1,6 +1,5 @@
 package ru.test.distance.calculator.controller;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,13 +19,8 @@ public class CityController {
         return cityService.getCities();
     }
 
-    @PostMapping("/calculateDistance")
-    public List<CalculateResponseDto> calculateDistance(@RequestBody @Valid CalculateDistancedDto calculateDistancedDto) {
-        return cityService.getDistance(calculateDistancedDto);
-    }
-
     @PostMapping("/file")
-    public void getCities1(@RequestBody MultipartFile file) {
+    public void saveAllFromFile(@RequestBody MultipartFile file) {
         cityService.saveCities(file);
     }
 }
