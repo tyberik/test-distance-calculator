@@ -24,14 +24,16 @@ public class DistanceMatrixCalculator {
         FindPath findPath = new FindPath();
 
         List<CalculateResponseDto> calculateResponseDtoList = new ArrayList<>();
-        for (int i = 0; i < fromCity.size(); i++) {
-            Long i1 = findPath.calculateShortestPath(aList, map.get(fromCity.get(i).getId()), map.get(toCity.get(i).getId()));
-            CalculateResponseDto calculateResponseDto = new CalculateResponseDto();
-            calculateResponseDto.setType(DISTANCE_MATRIX);
-            calculateResponseDto.setDistance(i1);
-            calculateResponseDto.setFromCity(fromCity.get(i).getName());
-            calculateResponseDto.setToCity(toCity.get(i).getName());
-            calculateResponseDtoList.add(calculateResponseDto);
+        for (CityShortDto shortDto : fromCity) {
+            for (CityShortDto cityShortDto : toCity) {
+                Long i1 = findPath.calculateShortestPath(aList, map.get(shortDto.getId()), map.get(cityShortDto.getId()));
+                CalculateResponseDto calculateResponseDto = new CalculateResponseDto();
+                calculateResponseDto.setType(DISTANCE_MATRIX);
+                calculateResponseDto.setDistance(i1);
+                calculateResponseDto.setFromCity(shortDto.getName());
+                calculateResponseDto.setToCity(cityShortDto.getName());
+                calculateResponseDtoList.add(calculateResponseDto);
+            }
         }
         return calculateResponseDtoList;
     }
